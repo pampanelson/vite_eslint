@@ -2056,7 +2056,7 @@ var Module = (function () {
       };
     }
 
-    var wasmBinaryFile = "func.wasm";
+    var wasmBinaryFile = "wasm/func.wasm";
     if (!isDataURI(wasmBinaryFile)) {
       wasmBinaryFile = locateFile(wasmBinaryFile);
     }
