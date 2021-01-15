@@ -1,30 +1,13 @@
 <template>
   <div>
     <div>{{ result }}</div>
-    <button @click="callAdd(Math.random(), Math.random())">Add</button>
+    <button @click="streamingCallAdd(Math.random(), Math.random())">
+      Streaming load Add
+    </button>
   </div>
 </template>
 
 <script>
-import Module from "../wasm/func";
-// put related .wasm file into /public
-// or change url in func.js as var wasmBinaryFile = "wasm/func.wasm";
-
-let promiseInstance = {
-  ready: new Promise((resolve) => {
-    console.log("wasm loading"); // loading callback
-    Module({
-      onRuntimeInitialized() {
-        promiseInstance = Object.assign(this, {
-          ready: Promise.resolve(),
-        });
-        resolve();
-        console.log("wasm loaded"); // loaded callback
-      },
-    });
-  }),
-};
-
 let streamingInstance;
 let bStreamingLoaded = false;
 (async () => {
@@ -39,7 +22,7 @@ let bStreamingLoaded = false;
 })();
 
 export default {
-  name: "Wasm",
+  name: "WasmStreaming",
   props: {},
   data() {
     return {
@@ -47,12 +30,6 @@ export default {
     };
   },
   methods: {
-    callAdd(a, b) {
-      promiseInstance.ready.then(
-        () => (this.result = promiseInstance._add(a, b))
-      );
-    },
-
     streamingCallAdd(a, b) {
       if (bStreamingLoaded) {
         this.result = streamingInstance.exports.add(a, b);
