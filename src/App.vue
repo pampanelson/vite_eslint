@@ -9,14 +9,14 @@
 
 <script>
 import HelloWorld from "./components/HelloWorld.vue";
-import Wasm from "./components/Wasm.vue";
+// import Wasm from "./components/Wasm.vue";
 import WasmStreaming from "./components/WasmStreaming.vue";
 export default {
   name: "App",
 
   components: {
     HelloWorld,
-    Wasm,
+    // Wasm,
     WasmStreaming,
   },
 };
